@@ -1,4 +1,4 @@
-USE Superstore
+USE [Superstore]
 GO
 
 SET ANSI_NULLS ON
@@ -7,13 +7,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Kenny Gallardo
--- Create date: 4/14/2026
+-- Create date: 5/7/2026
 -- Update date: 
--- Description:	Get one customer
--- EXEC GetCustomer @CustomerID = 1
+-- Description:	Get all Orders
+-- EXEC GetAllOrders
 -- =============================================
-CREATE PROCEDURE GetCustomer
-	@CustomerID INT
+CREATE PROCEDURE [dbo].[GetAllOrders]
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -21,15 +20,21 @@ BEGIN
 	SET NOCOUNT ON;
 
 	BEGIN TRY
-	-- Return Customer by their ID
-		SELECT TOP 1 c.CustomerID, c.FirstName, c.LastName, s.Segment
-		FROM dbo.Customer AS c
-		JOIN dbo.Segment AS s
-		ON c.SegmentID = s.SegmentID
-		WHERE c.CustomerID = @CustomerID AND IsActive = 1;
+		SELECT TOP 100 
+			OrderID,
+			OrderDate,
+			CustomerID,
+			SalesPrice,
+			Quantity,
+			Discount,
+			Profit,
+			s.ShipMode,
+			ShipDate
+		FROM dbo.[Order] AS o
+		JOIN dbo.ShipMode AS s
+		ON o.ShipModeID = s.ShipModeID
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_MESSAGE() AS ErrorMessage;
 	END CATCH
 END
-GO

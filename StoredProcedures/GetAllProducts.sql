@@ -1,4 +1,4 @@
-USE Superstore
+USE [Superstore]
 GO
 
 SET ANSI_NULLS ON
@@ -7,12 +7,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Kenny Gallardo
--- Create date: 4/14/2026
+-- Create date: 4/23/2026
 -- Update date: 
--- Description:	Get all customers
--- EXEC GetAllCustomers
+-- Description:	Get all Products
+-- EXEC GetAllProducts
 -- =============================================
-CREATE PROCEDURE GetAllCustomers
+CREATE PROCEDURE [dbo].[GetAllProducts]
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -20,15 +20,20 @@ BEGIN
 	SET NOCOUNT ON;
 
 	BEGIN TRY
-	-- Return top 100 active customers with their segment information
-		SELECT TOP 100 c.CustomerID, c.FirstName, c.LastName, s.Segment
-		FROM dbo.Customer AS c
-		JOIN dbo.Segment AS s
-		ON c.SegmentID = s.SegmentID
+		SELECT TOP 100 p.ProductID,
+			p.ProductName,
+			c.Category,
+			sc.SubCategory,
+			p.UnitPrice,
+			p.Quantity
+		FROM dbo.Product AS p
+		JOIN dbo.Category AS c
+		ON p.CategoryID = c.CategoryID
+		JOIN dbo.SubCategory AS sc
+		ON p.SubcategoryID = sc.SubCategoryID
 		WHERE IsActive = 1
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_MESSAGE() AS ErrorMessage;
 	END CATCH
 END
-GO
