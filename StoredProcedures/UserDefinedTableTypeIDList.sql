@@ -1,0 +1,5 @@
+-- Template
+CREATE TYPE dbo.IDList AS TABLE
+(
+    ID INT NOT NULL PRIMARY KEY
+);
