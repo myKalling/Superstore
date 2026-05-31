@@ -7,7 +7,7 @@ Updates & Deletion: Customer records are modified through UpdateCustomer. Deleti
 Address Integration: Addresses are managed through specific procedures like CreateAddress, UpdateAddress, and GetCustomerAddresses.
 2. Order Processing
 Transaction Handling: Orders are created using CreateOrder and updated via UpdateOrder, which utilizes COALESCE to allow partial updates of fields like SalesPrice or ShipDate.1011
-Detailed Insights: GetOrderDetails provides a complex view by returning both order headers and associated products in a structured JSON format.1
+Detailed Insights: GetOrderDetails provides a complex view by returning both order headers and associated products in a structured JSON format.
 History & Cleanup: DeleteOrder manages the removal or deactivation of order records and their corresponding details in the OrderDetail table.
 3. Product & Catalog Management
 Inventory Control: CreateProduct includes logic to prevent duplicates by checking for existing ProductName, CategoryID, and SubCategoryID combinations.
@@ -20,3 +20,62 @@ Data Integrity: Scripts like BackfillCustomerID.sql and BackfillProductIDandOrde
 Security & Administration
 Permissions: A dedicated AppUser is established with EXECUTE permissions granted at the schema level (dbo), ensuring the application can run these procedures without having direct table access.
 Bulk Loading: Templates for BULK INSERT are provided to ingest data from CSV files into staging tables (stg_Address, stg_OrderDetail) before moving them to production tables.
+
+Guidelines from Data 102 instructor provided:
+Superstore
+This project consists of a front-end written in React.js, a back-end written in C#, and MS SQL stored procedures.
+
+Superstore API
+Address
+GET /api/addresses/{id}
+
+POST /api/addresses
+
+PUT /api/addresses/{id}
+
+DELETE /api/addresses/{id}
+
+AddressType (Lookup Table)
+GET /api/addresstypes
+Category (Lookup Table)
+GET /api/categories
+
+Country (Lookup Table)
+GET /api/countries
+
+Customer
+GET /api/customers
+GET /api/customers/{id}
+GET /api/customers/{id}/addresses
+GET /api/customers/{id}/orders
+POST /api/customers
+PUT /api/customers/{id}
+DELETE /api/customers/{id}
+Order
+GET /api/orders
+GET /api/orders/{id}
+GET /api/orders/{id}/orderdetails
+POST /api/orders
+PUT /api/orders/{id}
+DELETE /api/orders/{id}
+Product
+GET /api/products
+GET /api/products/{id}
+POST /api/products
+PUT /api/products/{id}
+DELETE /api/products/{id}
+Region (Lookup Table)
+GET /api/regions
+
+Segment (Lookup Table)
+GET /api/segments
+
+ShipMode (Lookup Table)
+GET /api/shipmodes
+
+State (Lookup Table)
+GET /api/states
+
+SubCategory (Lookup Table)
+GET /api/subcategories
+
