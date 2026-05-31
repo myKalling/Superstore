@@ -51,6 +51,7 @@ GET /api/customers/{id}/orders
 POST /api/customers
 PUT /api/customers/{id}
 DELETE /api/customers/{id}
+
 Order
 GET /api/orders
 GET /api/orders/{id}
@@ -58,12 +59,14 @@ GET /api/orders/{id}/orderdetails
 POST /api/orders
 PUT /api/orders/{id}
 DELETE /api/orders/{id}
+
 Product
 GET /api/products
 GET /api/products/{id}
 POST /api/products
 PUT /api/products/{id}
 DELETE /api/products/{id}
+
 Region (Lookup Table)
 GET /api/regions
 
